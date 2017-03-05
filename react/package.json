@@ -1,0 +1,36 @@
+{
+  "name": "react-table",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf js-build/* && mkdir -p js-build/js",
+    "build:jsx": "browserify --debug -t [ babelify --presets [ es2015 react stage-2 ] ] src/js/main.jsx -o js-build/js/main.js",
+    "build": "npm run clean && npm run build:jsx"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.5.4",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "babelify": "^7.3.0",
+    "cssnano": "^3.9.1",
+    "node-sass": "^4.0.0",
+    "onchange": "^3.2.0",
+    "parallelshell": "^2.0.0",
+    "postcss-cli": "^2.6.0",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "uglify-js": "^2.7.5",
+    "watchify": "^3.8.0"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "jquery": "^3.1.1",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-immutable": "^3.0.10",
+  }
+}

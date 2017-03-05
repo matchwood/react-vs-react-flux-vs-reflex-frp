@@ -35,7 +35,8 @@ instance StoreData TestState where
 
 testApp :: View '[]
 testApp = mkControllerView @'[StoreArg TestState] "todo app" $ \(TestState ents) ->
-    div_ [onClick $ \_ _ ->  dispatchTest $ TestAction]$ do
+    div_ $ do
+      button_ [onClick $ \_ _ ->  dispatchTest $ TestAction] $ elemString $ "Add rows"
       let colNames = ["a","b","c","d"]
       table_ $ do
         thead_ . tr_ $ forM_ colNames $ \n ->
