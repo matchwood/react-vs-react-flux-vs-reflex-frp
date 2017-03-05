@@ -18,6 +18,7 @@ main =
       rec
 
         entries <- foldDyn (\_ _ -> table) [] buttonWithE
+        el "h3" $ text "reflex-frp ghcjs"
         (button, _) <- el' "button" (text "Add rows")
         let buttonWithE = domEvent Click button
         let colNames = ["a","b","c","d"]

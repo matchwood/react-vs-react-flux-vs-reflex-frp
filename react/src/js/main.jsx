@@ -1,5 +1,4 @@
 import React from 'react'
-import jq from 'jquery'
 import ReactDOM from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import * as redux from 'redux'
@@ -10,16 +9,13 @@ import Immutable from 'immutable'
 
 
 const ADD_ENTRIES = 'ADD_ENTRIES'
-const rootReducer = function(st, action){
-
-
-
-  if (action.type === ADD_ENTRIES){
-      var list = st.get('entries')
-      while (list.size < 1000) {
-        list = list.push({a: 'Some', b: 'Text here', c: 1.23, d: 424242})
-      }
-      return st.set('entries', list)
+const rootReducer = function (st, action) {
+  if (action.type === ADD_ENTRIES) {
+    var list = st.get('entries')
+    while (list.size < 1000) {
+      list = list.push({a: 'Some', b: 'Text here', c: 1.23, d: 424242})
+    }
+    return st.set('entries', list)
   }
 
   return st
@@ -29,7 +25,7 @@ const state = Immutable.Map({entries: Immutable.List()})
 const store = redux.createStore(rootReducer, state)
 
 
-const App = connect(st => {return {st: st}}) (props => {
+const App = connect(st => { return {st: st} })(props => {
 
   const {st, dispatch} = props
 
@@ -63,16 +59,7 @@ const App = connect(st => {return {st: st}}) (props => {
 
 
 
-function run () {
-      ReactDOM.render(
-      <Provider store={store}>
-      <App  />
-      </Provider>,  document.getElementById('table-example'))
-
-
-
-}
-
-jq(document).ready(function () {
-  run()
-})
+ReactDOM.render(
+  <Provider store={store}>
+  <App />
+  </Provider>, document.getElementById('table-example'))
