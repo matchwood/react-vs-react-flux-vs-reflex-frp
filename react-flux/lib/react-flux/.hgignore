@@ -1,0 +1,9 @@
+syntax:glob
+.stack-work
+.*.swp
+dist/
+.cabal-sandbox
+cabal.sandbox.config
+js-build/
+test/client/node_modules/
+example/todo/node_modules/
