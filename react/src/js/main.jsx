@@ -8,7 +8,6 @@ import * as redux from 'redux'
 
 import Immutable from 'immutable'
 
-import * as _ from 'lodash'
 
 const ADD_ENTRIES = 'ADD_ENTRIES'
 const rootReducer = function(st, action){
@@ -17,7 +16,9 @@ const rootReducer = function(st, action){
 
   if (action.type === ADD_ENTRIES){
       var list = st.get('entries')
-      list = list.push({a: 'something'})
+      while (list.size < 1000) {
+        list = list.push({a: 'Some', b: 'Text here', c: 1.23, d: 424242})
+      }
       return st.set('entries', list)
   }
 
@@ -36,6 +37,7 @@ const App = connect(st => {return {st: st}}) (props => {
     dispatch({type: ADD_ENTRIES})
   }
   return <div>
+  <h3>React with Redux</h3>
   <button onClick={dispatchAction}>Add rows</button>
 
   <table>
@@ -43,8 +45,8 @@ const App = connect(st => {return {st: st}}) (props => {
   <tr><th>a</th><th>b</th><th>c</th><th>d</th></tr>
   </thead>
   <tbody>
-  {st.get('entries').map((e) => {
-    return <tr><td>{e.a}</td></tr>
+  {st.get('entries').map((e, k) => {
+    return <tr key={k}><td>{e.a}</td><td>{e.b}</td><td>{e.c}</td><td>{e.d}</td></tr>
   })
 
 
@@ -74,5 +76,3 @@ function run () {
 jq(document).ready(function () {
   run()
 })
-
-11

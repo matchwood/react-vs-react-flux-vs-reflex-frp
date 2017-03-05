@@ -36,6 +36,7 @@ instance StoreData TestState where
 testApp :: View '[]
 testApp = mkControllerView @'[StoreArg TestState] "todo app" $ \(TestState ents) ->
     div_ $ do
+      h3_ $ elemString "react-flux ghcjs"
       button_ [onClick $ \_ _ ->  dispatchTest $ TestAction] $ elemString $ "Add rows"
       let colNames = ["a","b","c","d"]
       table_ $ do
