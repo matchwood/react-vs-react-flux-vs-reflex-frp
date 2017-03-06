@@ -13,23 +13,19 @@ import qualified Data.Text as T
 main :: IO ()
 main =
   mainWidget $ do
-    clicked <- delay 0.1 =<< getPostBuild
-    void . widgetHold blank $ ffor clicked $ \_ -> do
-      rec
-
-        entries <- foldDyn (\_ _ -> table) [] buttonWithE
-        el "h3" $ text "reflex-frp ghcjs"
-        (button, _) <- el' "button" (text "Add rows")
-        let buttonWithE = domEvent Click button
-        let colNames = ["a","b","c","d"]
-        _ <- elClass "table" "table" $ do
-          el "thead" . el "tr" $ forM_ colNames $ \n ->
-              el "th" (text n)
-          el "tbody" $ do
-            simpleList entries $ \e -> do
-              let cells = [fmap a e, fmap b e, fmap (show . c) e, fmap (show .d) e]
-              el "tr" . forM_ cells $ \cell -> do
-                el "td" (dynText (fmap T.pack cell))
+      el "h3" $ text "reflex-frp ghcjs"
+      (addRowsButton, _) <- el' "button" (text "Add rows")
+      let buttonWithE = table <$ domEvent Click addRowsButton
+      let colNames = ["a","b","c","d"]
+      _ <- elClass "table" "table" $ do
+        el "thead" . el "tr" $ forM_ colNames $ \n ->
+            el "th" (text n)
+        el "tbody" $ do
+          widgetHold blank $ ffor buttonWithE $ \entries -> do
+              forM_ entries $ \e -> do
+                let cells = [a e, b e, show $ c e, show $ d e]
+                el "tr" . forM_ cells $ \cell -> do
+                  el "td" $ text $ T.pack cell
       return ()
 
 data Entry = Entry
