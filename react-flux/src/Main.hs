@@ -11,12 +11,13 @@ module Main where
 import React.Flux
 import Control.Concurrent( forkIO, threadDelay )
 import Control.Monad( replicateM, void, forM_)
-import Data.Text(pack, append)
+import Data.Text(pack, append, Text)
 import Data.Time.Clock
 
 import Control.DeepSeq
 import GHC.Generics (Generic)
 import Data.Typeable (Typeable)
+import qualified Data.Text as T
 
 main :: IO ()
 main = do
@@ -43,17 +44,17 @@ testApp = mkControllerView @'[StoreArg TestState] "todo app" $ \(TestState ents)
         thead_ . tr_ $ forM_ colNames $ \n ->
             th_ (text_ n)
         tbody_ $ forM_ ents $ \Entry{..} -> do
-          let cells = [a, b, show c, show d]
+          let cells = [a, b, T.pack.show $ c, T.pack.show $ c]
           tr_. forM_ cells $ \cell -> do
-                td_ (elemString cell)
+                td_ (elemText cell)
 
 dispatchTest :: TestAction -> [SomeStoreAction]
 dispatchTest a = [someStoreAction @TestState a]
 
 
 data Entry = Entry
-  { a :: String
-  , b :: String
+  { a :: Text
+  , b :: Text
   , c :: Double
   , d :: Int
   } deriving (Show, Typeable)
