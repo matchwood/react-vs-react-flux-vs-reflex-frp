@@ -20,3 +20,6 @@ executable reflex-frp-table
                      , string-class
                      , text
                      , transformers
+                     , safe
+                     , aeson
+                     , bytestring

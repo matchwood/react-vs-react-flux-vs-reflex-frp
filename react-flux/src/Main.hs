@@ -31,7 +31,9 @@ data TestAction = TestAction
 
 instance StoreData TestState where
     type StoreAction TestState = TestAction
-    transform _ (TestState _) = return $ TestState table
+    transform _ (TestState _) = do
+      putStrLn "State transform called"
+      return $ TestState table
 
 
 testApp :: View '[]
