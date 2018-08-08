@@ -1,0 +1,16 @@
+resolver: lts-9.21
+compiler: ghcjs-0.2.1.9009021_ghc-8.0.2
+compiler-check: match-exact
+setup-info:
+ ghcjs:
+   source:
+     ghcjs-0.2.1.9009021_ghc-8.0.2:
+        url: https://github.com/matchwood/ghcjs-stack-dist/raw/develop/ghcjs-0.2.1.9009021.1.tar.gz
+        sha1: db8cd3252e47dbef3db7d1cf0d6d997e8d029f84
+packages:
+- '.'
+
+extra-deps:
+  - miso-0.14.0.0
+
+
