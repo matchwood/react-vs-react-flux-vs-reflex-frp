@@ -27,7 +27,7 @@ data Action
 main :: IO ()
 main = startApp App {..}
   where
-    initialAction = NoAction -- initial action to be executed on application load
+    initialAction = AddMany -- initial action to be executed on application load
     model  = []                    -- initial model
     update = updateModel          -- update function
     view   = viewModel            -- view function
@@ -38,13 +38,14 @@ main = startApp App {..}
 -- | Updates model, optionally introduces side effects
 updateModel :: Action -> Model -> Effect Action Model
 updateModel NoAction m = noEff m
-updateModel AddMany _ = noEff table
+updateModel AddMany _ = table <# do
+  putStrLn "Hello World" >> pure NoAction
 
 -- | Constructs a virtual DOM from a model
 viewModel :: Model -> View Action
 viewModel x = div_ [] [
-      h3_ [] [text "miso ghcjs"]
-    , button_ [ onClick AddMany ] [ text "Add rows"]
+      h3_ [] [text "miso ghcjs with 11.20"]
+    , button_ [onMouseDown AddMany ] [ text "Add rows"]
     , table_ [] [
         thead_ [] [tr_ [] $ map (\t -> th_ [] [text t]) ["a","b","c","d", "e"]]
         , tbody_ [] (toRows x)]

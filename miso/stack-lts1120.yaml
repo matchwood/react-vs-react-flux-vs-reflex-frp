@@ -13,4 +13,4 @@ packages:
 extra-deps:
   - miso-0.14.0.0
   - comonad-5
-  - /code/ghcjs/ghcjs-base
+

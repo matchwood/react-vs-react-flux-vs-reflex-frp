@@ -26,7 +26,7 @@ import qualified Data.ByteString.Lazy as BSL
 main :: IO ()
 main =
   mainWidget $ do
-      el "h3" $ text "reflex-frp ghcjs"
+      el "h3" $ text "reflex-frp ghcjs 11.20"
       (addRowsButton, _) <- el' "button" (text "Add rows")
       let buttonWithE = table <$ domEvent Click addRowsButton
       let colNames = ["a","b","c","d", "e"]

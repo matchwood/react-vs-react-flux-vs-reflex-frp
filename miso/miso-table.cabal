@@ -25,6 +25,7 @@ executable miso-table
                      , aeson
                      , text
                      , bytestring
+                     --, comonad
 
 
   default-extensions:  AutoDeriveTypeable
